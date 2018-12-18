@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>user.list</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body class="container">
+<h1>运算符</h1>
+<span th:text="${users.size() % 2 == 0}"/>
+
+<h1>字符串拼接</h1>
+<span th:text="'Welcome to our application, ' + ${users.get(0).userName} + '!'"/>
+
+<h1>文本替换</h1>
+<span th:text="|Welcome to our application, ${users.size()}!|"/>
+
+<h1>循环</h1>
+<table th:each="user:${users}" border="1">
+    <tr>
+        <td>name:</td>
+        <td><span th:text="${user.userName}"/></td>
+        <td>age:</td>
+        <td><span th:text="${user.age}"/></td>
+    </tr>
+</table>
+
+<h1>If/Unless</h1>
+<span th:if="${users.size()>10}" th:text="数据大于10条"/>
+<span th:unless="${users.size()>10}" th:text="数据小于10条"/>
+
+<h1>switch</h1>第一个人的年龄：
+<div th:switch="${users.get(0).age}">
+    <p th:case="10">10</p>
+    <p th:case="44">44</p>
+    <p th:case="${users.get(2)}">第一个和第三个年龄相同</p>
+    <p th:case="*">100</p>
+</div>
+
+<h1>Utilities内置</h1>
+String:<br/>
+获取第二个人的人名长度：<span th:text="${#strings.length(users.get(1).userName)}"/><br/>
+
+
+
+</body>
+</html>

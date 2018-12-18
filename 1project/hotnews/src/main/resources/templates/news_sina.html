@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>News</title>
+    <meta http-equiv="refresh" content="10">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+
+    <script type="text/javascript">
+
+    </script>
+    <style>
+        a{ text-decoration:none}
+    </style>
+</head>
+<body th:background="${backgroundimage}">
+<div>
+<H1 style="text-align: center"><span th:if="${type.equals('sina')}" th:text="微博"/><img src="https://imgs.t.sinajs.cn/t6/style/images/global_nav/WB_logo.png" height="30px"/></H1>
+<table>
+    <tr th:each="n,iterStat : ${newlist}" >
+        <td><span th:text="${iterStat.index+1 }" style="color: red"/></td>
+        <td style="border-bottom: 1px solid #808080"><a th:href="${n.link}" target="_blank"><span th:text="${n.name}" style="color: #0078B6"/></a><span th:text="${n.num}"
+                                                                    style="color: #808080;margin-left: 10px;font-size: 12px"/>
+        </td>
+        <td style="border-bottom: 1px solid #808080">
+            <span th:if="${n.flag.equals('1')}"
+                  style="background: #ff3852;display: inline-block;width: 16px;height: 16px;line-height: 16px;color: #fff;border-radius: 2px;text-align: center;"><font
+                    th:size="2">新</font></span>
+            <span th:if="${n.flag.equals('2')}"
+                  style="background: #ff9406;display: inline-block;width: 16px;height: 16px;line-height: 16px;color: #fff;border-radius: 2px;text-align: center;"><font
+                    th:size="2">热</font></span>
+            <span th:if="${n.flag.equals('16')}"
+                  style="background: #f86400;display: inline-block;width: 16px;height: 16px;line-height: 16px;color: #fff;border-radius: 2px;text-align: center;"><font
+                    th:size="2">沸</font></span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align-last: right;padding-right: 20px;color: #999999"><span th:text="${auth}"/>
+            更新于:<span th:text="${time}"/></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

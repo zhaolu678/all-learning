@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>userinfo</title>
+</head>
+<body>
+<h1>用户信息</h1>
+<form th:action="@{/user/update}" method="post">
+    <talbe>
+        <tr>
+            <td>用户名<input id="id" name="id" th:value="${user.id}" type="hidden"/></td>
+            <td><input type="text" id="userName" name="userName" th:value="${user.userName}" placeholder="userName"/></td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td><input type="text" id="password" name="password" th:value="${user.password}" placeholder="password"/></td>
+        </tr>
+        <tr>
+            <td>年龄</td>
+            <td><input type="text" id="age" name="age" th:value="${user.age}" placeholder="age"/></td>
+        </tr>
+    </talbe>
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

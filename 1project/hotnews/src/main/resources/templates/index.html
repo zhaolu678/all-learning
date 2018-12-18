@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>今日热门资讯</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+</head>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+<script type="text/javascript">
+
+</script>
+<body>
+<iframe th:src="@{./news/36ke}" width="40%" height="900" frameborder="0"></iframe>
+<iframe th:src="@{./news/toutiao}" width="18%" height="900" frameborder="0"></iframe>
+<iframe th:src="@{./news/sina}" width="27%" height="900" frameborder="0"></iframe>
+<canvas width="320" height="180" style="width:160px;height:90px;"></canvas>
+
+</body>
+</html>

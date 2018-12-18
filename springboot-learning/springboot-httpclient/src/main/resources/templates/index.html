@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>移动门户2x后台接口测试</title>
+</head>
+<script>
+    function login() {
+        var ml = document.getElementById("menhuurl").value;
+        var ecode = document.getElementById("ecode").value;
+        var uname = document.getElementById("uname").value;
+        var upassword = document.getElementById("upassword").value;
+        if(!ml || !ecode || !uname || !upassword){
+            alert("请填写以上信息！");
+            return false;
+        }
+        document.getElementById("testform").action="./login";
+    }
+    
+    function getuserstats() {
+        var ml = document.getElementById("menhuurl").value;
+        var ecode = document.getElementById("ecode").value;
+        var usertoken = document.getElementById("usertoken").value;
+        if(!ml||!ecode||!usertoken){
+            alert("请填写以上信息！");
+            return false;
+        }
+        document.getElementById("testform").action="./getuserstats";
+    }
+
+    function getaccanduinfo() {
+        var ml = document.getElementById("menhuurl").value;
+        var appid = document.getElementById("appid").value;
+        var secretkey = document.getElementById("secretkey").value;
+        var usertoken = document.getElementById("usertoken").value;
+        if(!ml||!appid||!secretkey||!usertoken){
+            alert("请填写以上信息！");
+            return false;
+        }
+        document.getElementById("testform").action="./getaccanduinfo";
+    }
+    
+    function getnewsinfobychannelid() {
+        var ml = document.getElementById("menhuurl").value;
+        var channelid = document.getElementById("channelid").value;
+        var usertoken = document.getElementById("usertoken").value;
+        if(!ml||!channelid||!usertoken){
+            alert("请填写以上信息！");
+            return false;
+        }
+        document.getElementById("testform").action="./getnewsinfobychannelid";
+    }
+</script>
+<body>
+<b>描述门户接口：测试登录接口，用户待办数接口，第三方调用获取accesstoken，userinfo接口,测试查询栏目下的新闻列表</b>
+<form action="/" id="testform" method="post">
+<h1>.登录</h1>
+    移动门户服务器地址：<input id="menhuurl" name="menhuurl" th:value="${menhuurl}" size="30"/><font color="red">*</font>(接口地址，如：http://xxxxx/interface<font color="red">/</font>)<br/>
+ECODE：<input id="ecode" name="ecode" th:value="${ecode}"/><font color="red">*</font><br/>
+用户名：<input id="uname" name="uname" th:value="${uname}"/><font color="red">*</font><br/>
+密码：<input id="upassword" name="upassword" th:value="${upassword}"/><font color="red">*</font><br/>
+    <input type="hidden" id="name" name="name" th:value="${name}"/><input type="hidden" id="department" name="department" th:value="${department}"/>
+<button onclick="return login()">请求测试</button><p/>
+结果：<font color="red" th:text="${loginresult}"></font><br/>
+耗时：<font color="red" th:text="${logintotaltime}"></font><br/>
+<hr/>
+    UserToken：(当前用户：(<font color="red" th:text="${name}"></font>|<font color="red" th:text="${department}"></font>))<input th:id="usertoken" name="usertoken" th:value="${usertoken}" size="140"/><br/>
+<h1>.测试用户待办数</h1>
+<button onclick="return getuserstats()">请求测试</button><br/>
+    结果：<font color="red" th:text="${userstatsresult}"></font><br/>
+    耗时：<font color="red" th:text="${userstatstime}"></font><br/>
+    <hr/>
+<h1>.测试获取accesstoken、userinfo</h1>
+    appid：<input id="appid" name="appid" th:value="${appid}"/><br/>
+    secretkey：<input id="secretkey" name="secretkey" th:value="${secretkey}"/><br/>
+<button  onclick="return getaccanduinfo()">请求测试</button><br/>
+获取accesstoken接口：<br/>
+    结果：<font color="red" th:text="${accesstokenstr}"></font><br/>
+    耗时：<font color="red" th:text="${acctotaltime}"></font><br/><br/>
+获取userinfo接口：<br/>
+    结果：<font color="red" th:text="${getuserinfostr}"></font><br/>
+    耗时：<font color="red" th:text="${getuserinfototaltime}"></font><br/>
+<hr/>
+    <h1>.测试查询栏目下的新闻列表</h1>
+    channelid：<input id="channelid" name="channelid" th:value="${channelid}"/><br/>
+    <button  onclick="return getnewsinfobychannelid()">请求测试</button><br/>
+    查询每个栏目下的新闻列表接口：<br/>
+    结果：<font color="red" th:text="${getnewsresult}"></font><br/>
+    耗时：<font color="red" th:text="${getuserinfototaltime}"></font><br/><br/>
+</form>
+</body>
+</html>

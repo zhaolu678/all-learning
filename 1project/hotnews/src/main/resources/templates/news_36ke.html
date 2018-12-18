@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>News</title>
+    <meta http-equiv="refresh" content="300">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <style>
+        a{text-decoration:none}
+    </style>
+</head>
+<body th:background="${backgroundimage}">
+<H1 style="text-align: center"><span th:if="${type.equals('36ke')}" th:text="快讯"/><img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3476308048,1091683634&fm=58&s=10225832ECEAFE1102DF8EC70300F0AB&bpow=121&bpoh=75" height="30px"/></H1>
+<table>
+    <tr th:each="n,iterStat : ${newlist}">
+        <td><span th:text="${iterStat.index+1 }" style="color: red"/></td>
+        <td style="border-bottom: 1px solid #808080"><a th:href="${n.link}" target="_blank"><span th:text="${n.name}" style="color: #0078B6"/></a></td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align-last: right;padding-right: 20px;color: #999999"><span th:text="${auth}"/>
+            更新于:<span th:text="${time}"/></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx "
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/data/jpa
+       http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd"
+       xmlns:context="http://www.springframework.org/schema/c">
+
+    <!-- 1.引入属性文件，在配置中占位使用:db.properties -->
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <!-- 2.配置数据源 -->
+    <bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${mysql.driver}"></property>
+        <property name="jdbcUrl" value="${mysql.url}"></property>
+        <property name="user" value="${mysql.uid}"></property>
+        <property name="password" value="${mysql.password}"></property>
+        <property name="acquireIncrement" value="${mysql.acquireIncrement}"></property>
+        <property name="initialPoolSize" value="${mysql.initialPoolSize}"></property>
+        <property name="minPoolSize" value="${mysql.minPoolSize}"></property>
+        <property name="maxPoolSize" value="${mysql.maxPoolSize}"></property>
+    </bean>
+
+    <!-- jpa扫描包 -->
+    <jpa:repositories base-package="com.luchao"/>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+
+    </bean>
+</beans>
+
+

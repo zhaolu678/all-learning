@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户注册</title>
+</head>
+<body>
+<form th:action="@{/add}" method="post">
+    年龄：<input type="text" name="age" th:value="${author.age}"/><font color="red" th:errors="${author.age}"></font><br/>
+    用户名：<input type="text" name="username" th:value="${author.username}"/><font color="red" th:errors="${author.username}"></font><br/>
+    邮件：<input type="text" name="email" th:value="${author.email}"/><font color="red" th:errors="${author.email}"></font><br/>
+    手机号：<input type="text" name="telphone" th:value="${author.telphone}"/><font color="red" th:errors="${author.telphone}"></font><br/>
+    <button type="submit">提交</button><br/>
+    <span th:text="${msg}"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,6 @@
+com\luchao\service\ConsumerService.class
+com\luchao\filter\QueueMessageListener.class
+com\luchao\service\ProducerService$1.class
+com\luchao\service\ProducerService.class
+com\luchao\controller\MessageController.class
+com\luchao\service\ProducerService$2.class

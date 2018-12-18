@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>News</title>
+    <meta http-equiv="refresh" content="300">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <style>
+        a{ text-decoration:none}
+    </style>
+</head>
+<body th:background="${backgroundimage}">
+<H1 style="text-align: center"><span th:if="${type.equals('toutiao')}" th:text="热搜"/> <img src="http:////s3.pstatp.com/toutiao/resource/ntoutiao_web/static/image/logo_201f80d.png" height="20px"/></H1>
+<table>
+    <tr th:each="n,iterStat : ${newlist}">
+        <td><span th:text="${iterStat.index+1 }" style="color: red"/></td>
+        <td style="border-bottom: 1px solid #808080"><a th:href="${n.link}" target="_blank"><span th:text="${n.name}" style="color: #0078B6"/></a></td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align-last: right;padding-right: 20px;color: #999999"><span th:text="${auth}"/>
+            <span th:text="${time}"/></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,5 @@
+com\luchao\dao\GoodsRepository.class
+com\luchao\entity\Goods.class
+com\luchao\test\QueryDslTest.class
+com\luchao\entity\QGoods.class
+com\luchao\test\GoodsTest.class

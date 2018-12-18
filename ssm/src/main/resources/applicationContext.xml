@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+    <!-- 1.引入属性文件，在配置中占位使用:db.properties -->
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <!-- 2.配置数据源 -->
+    <bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${mysql.driver}"></property>
+        <property name="jdbcUrl" value="${mysql.url}"></property>
+        <property name="user" value="${mysql.uid}"></property>
+        <property name="password" value="${mysql.password}"></property>
+        <property name="acquireIncrement" value="${mysql.acquireIncrement}"></property>
+        <property name="initialPoolSize" value="${mysql.initialPoolSize}"></property>
+        <property name="minPoolSize" value="${mysql.minPoolSize}"></property>
+        <property name="maxPoolSize" value="${mysql.maxPoolSize}"></property>
+    </bean>
+    <!-- 3.配置会话工厂bean sqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 配置文件路径 -->
+        <property name="configLocation" value="classpath:myBatisCfg.xml"></property>
+        <property name="dataSource" ref="datasource"></property>
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:com/luchao/dao/*Mapper.xml"></property>
+    </bean>
+    <!-- 4.和mybatis整合自动扫描对象关系映射 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定会话工厂，如果当前上下文中只定义了一个则该属性可省去 -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        <!-- 指定要自动扫描接口的基础包，实现接口 -->
+        <property name="basePackage" value="com.luchao.dao"></property>
+    </bean>
+    <!-- 5.声明式事务管理 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="datasource"></property>
+    </bean>
+    <!--支持注解驱动的事务管理，指定事务管理器 -->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
+    <!-- 6.容器自动扫描IOC组件 -->
+    <context:component-scan base-package="com.luchao"></context:component-scan>
+    <!-- 7.配置视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--前缀-->
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <!--后缀-->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--8.文件上传解析器 -->
+    <!--Spring MVC默认不能识别multipart格式的文件内容 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+    </bean>
+</beans>

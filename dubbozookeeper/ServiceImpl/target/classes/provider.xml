@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 注册到dubbo的名称 -->
+    <dubbo:application name="dubbo_provider"></dubbo:application>
+    <!-- 当前bean -->
+    <bean id="myServiceImpl" class="com.luchao.serviceimpl.MyServiceImpl"></bean>
+    <!-- 注册到zookeeper -->
+    <dubbo:registry address="zookeeper://192.168.52.1:2181" check="false" subscribe="false"
+                    protocol="zookeeper"></dubbo:registry>
+    <!-- 服务提供者 -->
+    <dubbo:service interface="com.luchao.service.MyService" ref="myServiceImpl" timeout="60000"/>
+    <!-- 使用指定的协议暴露服务，在多协议时使用，值为<dubbo:protocol>的id属性，多个协议ID用逗号分隔，可以有dubbo/hessian/rmi/thrift/redis等，后面会详细介绍每种协议  -->
+    <dubbo:protocol name="dubbo" port="12345"/>
+
+</beans>
